@@ -1,0 +1,38 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: "Mickael Patron"
+  description: "Configuration linux pour serveur de developpement et production"
+  company: JObjects
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - trixie
+        - bookworm
+        - bullseye
+        - buster
+    - name: Ubuntu
+      versions:
+        - noble
+        - jammy
+        - focal
+        - bionic
+  #    - name: Alpine
+  #      version:
+  #        - all
+  #    - name: ArchLinux
+  #      versions:
+  #        - all
+
+  galaxy_tags:
+    - developpement
+    - server
+    - system

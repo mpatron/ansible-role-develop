@@ -1,0 +1,17 @@
+---
+- name: Installer git et vim
+  ansible.builtin.package:
+    name:
+      - git
+      - vim
+      - curl
+      - dnsutils
+      - nmap
+      - tcpdump
+      - lsof
+      - iotop
+      - htop
+      - sysstat
+      - wget
+      - iptraf
+    state: present

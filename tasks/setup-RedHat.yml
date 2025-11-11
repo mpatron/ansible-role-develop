@@ -1,0 +1,22 @@
+---
+- name: Ensure EPEL packages are installed.
+  ansible.builtin.yum:
+    name:
+      - epel-release
+      - git
+      - vim
+      - bind-utils
+      - nmap
+      - tcpdump
+      - lsof
+      - iotop
+      - sysstat
+      - wget
+      - iptraf
+    state: present
+- name: Installer curl et htop avec epel
+  ansible.builtin.yum:
+    name:
+      - curl
+      - htop
+    state: present

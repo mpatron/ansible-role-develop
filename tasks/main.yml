@@ -1,0 +1,10 @@
+---
+# Setup/install tasks.
+- ansible.builtin.include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- ansible.builtin.include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- ansible.builtin.include_tasks: setup-Archlinux.yml
+  when: ansible_os_family == 'Archlinux'

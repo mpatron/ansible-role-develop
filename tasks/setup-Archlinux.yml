@@ -1,0 +1,17 @@
+---
+- name: Installer git et vim
+  ansible.builtin.pacman:
+    name:
+      - git
+      - vim
+      - curl
+      - bind-utils
+      - nmap
+      - tcpdump
+      - lsof
+      - iotop
+      - htop
+      - sysstat
+      - wget
+      - iptraf
+    state: present
