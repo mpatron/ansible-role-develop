@@ -1,4 +1,4 @@
-
+on working...
 
 Dépendances :
 Alors en fait rien sur galaxy, mais pour pip, il y en a une sur importante, c'est passlib pour les mots de passe. Ne pas oublier de faire "pip install -r requirements.txt".
