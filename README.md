@@ -61,3 +61,4 @@ molecule converge --scenario-name runinpodman
 
 https://github.com/ansible/molecule/blob/main/docs/examples/podman.md
 https://github.com/ansible/molecule/blob/main/tests/fixtures/integration/test_command/molecule/podman/molecule.yml
+il faut, semble t-il, posser le role dans galaxy avant de faire un test molecule
