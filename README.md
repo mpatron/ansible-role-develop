@@ -47,3 +47,17 @@ podman run -it --rm \
  -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK \
  ghcr.io/ansible/community-ansible-dev-tools:latest
 ~~~
+
+
+molecule test --scenario-name runinpodman
+clear && molecule test --scenario-name runinpodman --report --command-borders
+
+molecule create --scenario-name runinpodman
+podman ps
+molecule login --scenario-name runinpodman
+
+molecule destroy --scenario-name runinpodman
+molecule converge --scenario-name runinpodman
+
+https://github.com/ansible/molecule/blob/main/docs/examples/podman.md
+https://github.com/ansible/molecule/blob/main/tests/fixtures/integration/test_command/molecule/podman/molecule.yml
