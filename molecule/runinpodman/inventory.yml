@@ -1,0 +1,82 @@
+---
+all:
+  children:
+#    molecule:
+#      hosts:
+#        molecule-fedora:
+#          ansible_connection: containers.podman.podman
+#          container_image: ghcr.io/ansible/community-ansible-dev-tools:latest
+#          container_command: sleep 1d
+#          container_privileged: false
+    debians:
+      hosts:
+        debian12:
+          ansible_host: debian12-server
+          ansible_connection: containers.podman.podman
+          container_image: quay.io/lib/debian:12
+          container_command: /sbin/init
+          container_privileged: true
+#        debian13:
+#          ansible_host: debian13-server
+#          ansible_connection: containers.podman.podman
+#          container_image: quay.io/lib/debian:13-slim
+#          container_command: sleep 1d
+#          container_privileged: false
+#      vars:
+#        http_port: 80
+#        server_name: test-web
+#        required_packages:
+#          - python3
+#          - systemd
+#    ubuntus:
+#      hosts:
+#        ubuntu2004:
+#          ansible_host: ubuntu2004-server
+#          ansible_connection: containers.podman.podman
+#          container_image: docker.io/ubuntu:20.04
+#          container_command: /sbin/init
+#          container_privileged: true
+#        ubuntu2204:
+#          ansible_host: ubuntu2204-server
+#          ansible_connection: containers.podman.podman
+#          container_image: docker.io/ubuntu:22.04
+#          container_command: /sbin/init
+#          container_privileged: true
+#        ubuntu2404:
+#          ansible_host: ubuntu2404-server
+#          ansible_connection: containers.podman.podman
+#          container_image: docker.io/ubuntu:24.04
+#          container_command: /sbin/init
+#          container_privileged: true
+#      vars:
+#        http_port: 80
+#        server_name: test-web
+#        required_packages:
+#          - python3
+#          - systemd
+#    redhats:
+#      hosts:
+#        rhel9:
+#          ansible_host: rhel9-server
+#          ansible_connection: containers.podman.podman
+#          container_image: registry.access.redhat.com/ubi9:latest
+#          container_command: /sbin/init
+#          container_privileged: true
+#        rocky9:
+#          ansible_host: rocky9-server
+#          ansible_connection: containers.podman.podman
+#          container_image: docker.io/rockylinux/rockylinux:9
+#          container_command: /sbin/init
+#          container_privileged: true
+#        alma9:
+#          ansible_host: alma9-server
+#          ansible_connection: containers.podman.podman
+#          container_image: docker.io/almalinux/almalinux:9
+#          container_command: /sbin/init
+#          container_privileged: true
+#      vars:
+#        http_port: 80
+#        server_name: test-web
+#        required_packages:
+#          - python3
+#          - systemd
