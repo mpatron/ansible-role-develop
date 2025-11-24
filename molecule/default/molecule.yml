@@ -11,17 +11,12 @@ driver:
 platforms:
   - name: instance
     image: docker.io/rockylinux/rockylinux:9
-    # image: docker.io/debian:13
-    # image: docker.io/debian:13-slim
-    # image: quay.io/lib/debian:13-slim
     pre_build_image: true
 
 provisioner:
   name: ansible
   playbooks:
     converge: converge.yml
-#  options:
-#    roles_path: ${MOLECULE_SCENARIO_DIRECTORY}/../..
 
 verifier:
   name: testinfra
