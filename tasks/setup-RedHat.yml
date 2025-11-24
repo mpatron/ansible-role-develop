@@ -1,6 +1,6 @@
 ---
 - name: Ensure EPEL packages are installed.
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name:
       - epel-release
       - git
@@ -15,13 +15,13 @@
       - iptraf
     state: present
 - name: Déinstaller curl-minimal et bug sur rockylinux:9 pour le remplacer par curl
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name:
       - curl-minimal
       - vim-enhanced
     state: absent
 - name: Installer curl et htop avec epel
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name:
       - curl
       - htop

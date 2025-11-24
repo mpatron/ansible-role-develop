@@ -20,7 +20,7 @@
       - vim-enhanced
     state: absent
 - name: "== Fedora == Installer vim"
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name:
       - vim
     state: present

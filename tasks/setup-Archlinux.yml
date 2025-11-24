@@ -1,6 +1,6 @@
 ---
 - name: Installer git et vim
-  ansible.builtin.pacman:
+  community.general.pacman:
     name:
       - git
       - vim

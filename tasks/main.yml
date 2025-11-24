@@ -1,13 +1,21 @@
 ---
 # Setup/install tasks.
-- ansible.builtin.include_tasks: setup-RedHat.yml
+- name: Pour Redhat
+  ansible.builtin.include_tasks:
+    file: setup-RedHat.yml
   when: ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora'
 
-- ansible.builtin.include_tasks: setup-Fedora.yml
+- name: Pour Fedora
+  ansible.builtin.include_tasks:
+    file: setup-Fedora.yml
   when: ansible_os_family == 'RedHat' and ansible_distribution == 'Fedora'
 
-- ansible.builtin.include_tasks: setup-Debian.yml
+- name: Pour Debian
+  ansible.builtin.include_tasks:
+    file: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- ansible.builtin.include_tasks: setup-Archlinux.yml
+- name: Pour Archlinux
+  ansible.builtin.include_tasks:
+   file: setup-Archlinux.yml
   when: ansible_os_family == 'Archlinux'
