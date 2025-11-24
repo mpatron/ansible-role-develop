@@ -1,6 +1,9 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-file: ${MOLECULE_SCENARIO_DIRECTORY}/requirements.yml
+    requirements-file: ${MOLECULE_SCENARIO_DIRECTORY}/requirements.yml
 
 driver:
   name: podman
@@ -8,14 +11,24 @@ driver:
 platforms:
   - name: instance
     image: docker.io/rockylinux/rockylinux:9
+    # image: docker.io/debian:13
+    # image: docker.io/debian:13-slim
+    # image: quay.io/lib/debian:13-slim
     pre_build_image: true
 
 provisioner:
   name: ansible
   playbooks:
     converge: converge.yml
-  options:
-    roles_path: ${MOLECULE_SCENARIO_DIRECTORY}/../..
+#  options:
+#    roles_path: ${MOLECULE_SCENARIO_DIRECTORY}/../..
 
 verifier:
   name: testinfra
+  enabled: true
+  options:
+    verbose: true
+    capture: no
+  additional_files_or_dirs:
+    - test_*.py
+    - tests/

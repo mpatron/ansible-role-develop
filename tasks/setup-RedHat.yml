@@ -14,6 +14,11 @@
       - wget
       - iptraf
     state: present
+- name: Déinstaller curl-minimal et bug sur rockylinux:9 pour le remplacer par curl
+  ansible.builtin.yum:
+    name:
+      - curl-minimal
+    state: absent
 - name: Installer curl et htop avec epel
   ansible.builtin.yum:
     name:
