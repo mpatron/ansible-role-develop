@@ -2,3 +2,4 @@
 passlib>=1.7.4
 molecule>=5.0.0
 molecule-plugins[podman,vagrant]
+testinfra>=10.0.0

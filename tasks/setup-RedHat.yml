@@ -18,6 +18,7 @@
   ansible.builtin.yum:
     name:
       - curl-minimal
+      - vim-enhanced
     state: absent
 - name: Installer curl et htop avec epel
   ansible.builtin.yum:

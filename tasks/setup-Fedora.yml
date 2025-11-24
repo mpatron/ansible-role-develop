@@ -1,0 +1,26 @@
+---
+- name: "== Fedora == Ensure all packages are installed"
+  ansible.builtin.dnf:
+    name:
+      - git
+      - bind-utils
+      - nmap
+      - tcpdump
+      - lsof
+      - iotop
+      - sysstat
+      - wget
+      - iptraf
+      - curl
+      - htop
+    state: present
+- name: "== Fedora == Déinstaller vim-enhanced pour le remplacer par vim sur Fedora"
+  ansible.builtin.dnf:
+    name:
+      - vim-enhanced
+    state: absent
+- name: "== Fedora == Installer vim"
+  ansible.builtin.yum:
+    name:
+      - vim
+    state: present

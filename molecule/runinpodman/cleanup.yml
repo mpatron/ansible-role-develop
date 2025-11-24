@@ -1,10 +1,19 @@
 ---
-- name: Cleanup
-  hosts: all
+- name: Cleanup container instances
+  hosts: molecule
   gather_facts: false
   tasks:
-    - name: Remove test artifacts
+    - name: Check if container is running
+      containers.podman.podman_container_info:
+        name: "{{ inventory_hostname }}"
+      register: container_info
+      delegate_to: localhost
+
+    - name: Remove temporary files from running containers
       ansible.builtin.file:
-        path: /tmp/molecule-test
+        path: /tmp/molecule_os_info.txt
         state: absent
-      become: true
+      when:
+        - container_info.containers | length > 0
+        - container_info.containers[0].State.Running
+      failed_when: false

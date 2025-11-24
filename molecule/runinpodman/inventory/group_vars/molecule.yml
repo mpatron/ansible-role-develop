@@ -1,0 +1,5 @@
+---
+# Molecule group variables for container configuration
+container_log_driver: json-file
+container_systemd: false
+# container_privileged: false

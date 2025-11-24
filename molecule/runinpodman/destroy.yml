@@ -3,15 +3,20 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Remove test containers
-      containers.podman.podman_container:
-        name: "{{ hostvars[item].ansible_host }}"
-        state: absent
-      loop: "{{ groups['all'] }}"
-      failed_when: false
+    - name: Get info for all containers
+      containers.podman.podman_container_info:
+        name: "{{ item }}"
+      loop: "{{ groups['molecule'] }}"
+      register: podman_infos
 
-    - name: Remove container network
-      containers.podman.podman_network:
-        name: molecule-linux-test
-        state: absent
-      failed_when: false
+    - name: Kill container if running
+      containers.podman.podman_container:
+        name: "{{ item.item }}"
+        state: stopped
+        timeout: 2
+      loop: "{{ podman_infos.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+      when:
+        - item.containers | length > 0
+        - item.containers[0].State.Status == "running"

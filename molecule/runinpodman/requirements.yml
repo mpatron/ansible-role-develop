@@ -2,6 +2,4 @@
 collections:
   - name: containers.podman
     version: ">=1.10.0"
-roles:
-  - name: ansible_role_develop
-    src: ${MOLECULE_SCENARIO_DIRECTORY}/../..
+roles: []
