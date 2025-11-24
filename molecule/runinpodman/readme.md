@@ -10,3 +10,6 @@ molecule test --scenario-name runinpodman --report --command-borders
 molecule create --scenario-name runinpodman --report --command-borders
 molecule converge --scenario-name runinpodman --report --command-borders
 molecule verify --scenario-name runinpodman --report --command-borders
+
+
+clear && molecule reset && molecule test --scenario-name runinpodman --report --command-borders
