@@ -2,12 +2,12 @@
 dependencies: []
 
 galaxy_info:
-  role_name: ansible_role_develop
-  namespace: mpatron
   author: "Mickael Patron"
   description: "Configuration linux pour serveur de developpement et production"
   company: JObjects
   license: "license (BSD, MIT)"
+  namespace: mpatron
+  role_name: ansible_role_develop
 
   min_ansible_version: "2.1"
 
