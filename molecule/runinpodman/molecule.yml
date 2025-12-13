@@ -8,16 +8,22 @@ dependency:
 driver:
   name: podman
 
-platforms:
-  - name: debian12-server
-    image: docker.io/rockylinux/rockylinux:9
-    # image: docker.io/debian:13
-    # image: docker.io/debian:13-slim
-    # image: quay.io/lib/debian:13-slim
-    pre_build_image: true
+# platforms:
+#   - name: instance
+#     # privileged: true
+#     # override_command: false
+#     # user: root
+#     image: docker.io/fedora:latest
+#     # image: docker.io/rockylinux/rockylinux:9
+#     # image: docker.io/debian:13
+#     # image: docker.io/debian:13-slim
+#     # image: quay.io/lib/debian:13-slim
+#     pre_build_image: true
 
 provisioner:
   name: ansible
+#  options:
+#    become: false
   playbooks:
     converge: converge.yml
 

@@ -1,7 +1,13 @@
 ---
 - name: Create container instances
   hosts: localhost
-  gather_facts: false
+  # gather_facts: true
+  # become: false
+  # become_method: "ansible.builtin.sudo"
+  # become_ask_pass: false # https://docs.ansible.com/projects/ansible/latest/reference_appendices/config.html#default-become-ask-pass
+  # become_user: root
+  # become: true
+  # become_user: root
   tasks:
     - name: Create containers from inventory
       containers.podman.podman_container:
@@ -33,3 +39,20 @@
         timeout: 30
       delegate_to: "{{ item }}"
       loop: "{{ groups['molecule'] }}"
+
+    - name: Afficher ansible_os_family
+      ansible.builtin.debug:
+        msg: "La famille OS est : {{ ansible_os_family }}, et le become_user est {{ become_user | default('rien_ni_personne') }}"
+    - name: Afficher ansible_distribution
+      ansible.builtin.debug:
+        msg: "La distribution est : {{ ansible_distribution }} {{ ansible_distribution_version }} {{ ansible_distribution_release }}"
+
+    - name: "== Create == Install a list of packages"
+      ansible.builtin.dnf:
+        name:
+          - systemd
+          - openssh-server
+        state: present
+      delegate_to: "{{ item }}"
+      loop: "{{ groups['molecule'] }}"
+      # when: ansible_os_family == 'RedHat' and ansible_distribution == 'Fedora'

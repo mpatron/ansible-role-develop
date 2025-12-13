@@ -18,6 +18,8 @@ cd ~/Documents/ansible-role-develop
 molecule test
 podman run -it docker.io/almalinux:9 /bin/bash
 podman run -it docker.io/ubuntu:24.04 /bin/bash
+podman run -it docker.io/rockylinux/rockylinux:9 /bin/bash
+podman run -it docker.io/fedora:latest /bin/bash
 apt update && apt install -yqq vim curl dnsutils nmap tcpdump lsof iotop htop sysstat wget iptraf
 # iostat & iotop  => performance disques
 # iptraf =>  performance reseau
@@ -55,6 +57,7 @@ molecule converge --scenario-name runinpodman
 ~~~
 
 ~~~txt
+https://docs.ansible.com/projects/molecule/
 https://github.com/ansible/molecule/blob/main/docs/examples/podman.md
 https://github.com/ansible/molecule/blob/main/tests/fixtures/integration/test_command/molecule/podman/molecule.yml
 ~~~

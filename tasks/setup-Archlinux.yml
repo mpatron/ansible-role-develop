@@ -1,5 +1,5 @@
 ---
-- name: Installer git et vim
+- name: "== Setup ArchLinux == Installer git et vim"
   community.general.pacman:
     name:
       - git

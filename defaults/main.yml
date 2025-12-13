@@ -1,1 +1,6 @@
 ---
+# defaults file for ansible_role_libvirt_client_configure
+ansible_role_develop_conf_adminuser: myadmin
+ansible_role_develop_conf_journald_system_max_use: 4G
+ansible_role_develop_conf_journald_system_max_file_size: 500M
+ansible_role_develop_conf_hostsfile: false

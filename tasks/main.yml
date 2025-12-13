@@ -19,3 +19,83 @@
   ansible.builtin.include_tasks:
    file: setup-Archlinux.yml
   when: ansible_os_family == 'Archlinux'
+
+## sudo sed -i -e "\\#PasswordAuthentication no# s#PasswordAuthentication no#PasswordAuthentication yes#g" /etc/ssh/sshd_config
+- name: "== Setup All == Replace a localhost entry searching for a literal string to avoid escaping" # Ok almalinux, ubuntu et archlinux
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#PasswordAuthentication'
+    line: PasswordAuthentication yes
+    backup: true
+  notify:
+    - "Reload sshd"
+
+- name: "== Setup All == Déployer le fichier /etc/hosts"
+  ansible.builtin.template:
+    src: templates/hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_role_develop_conf_hostsfile | bool
+
+# Journald for OS type RedHat
+- name: "== Setup All == Journald Storage"
+  community.general.ini_file:
+    path: /etc/systemd/journald.conf
+    section: Journal
+    option: Storage
+    value: persistent
+    mode: '0644'
+    state: present
+    backup: true
+  notify: "Restart systemd-journald service"
+- name: "== Setup All == Journald SystemMaxUse"
+  community.general.ini_file:
+    path: /etc/systemd/journald.conf
+    section: Journal
+    option: SystemMaxUse
+    value: "{{ ansible_role_develop_conf_journald_system_max_use }}"
+    mode: '0644'
+    state: present
+    backup: true
+  notify: "Restart systemd-journald service"
+- name: "== Setup All == Journald SystemMaxFileSize"
+  community.general.ini_file:
+    path: /etc/systemd/journald.conf
+    section: Journal
+    option: SystemMaxFileSize
+    value: "{{ ansible_role_develop_conf_journald_system_max_file_size }}"
+    mode: '0644'
+    state: present
+    backup: true
+  notify: "Restart systemd-journald service"
+
+
+## ============================================================================
+- name: Copy proxy internet configuration
+  ansible.builtin.copy:
+    src: "files/{{ item }}"
+    dest: "/etc/profile.d/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  loop:
+    - proxy-internet.sh
+- name: Copy ssh key configuration
+  ansible.builtin.copy:
+    src: "files/{{ item }}"
+    dest: "/home/{{ ansible_user }}/.ssh/{{ item }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0600'
+  loop:
+    - id_rsa
+- name: "== Setup user in RedHat == Copy id_rsa.pub"
+  ansible.builtin.template:
+    src: "id_rsa.pub.j2"
+    dest: "/home/{{ ansible_role_develop_conf_adminuser }}/.ssh/id_rsa.pub"
+    owner: "{{ ansible_role_develop_conf_adminuser }}"
+    group: "{{ ansible_role_develop_conf_adminuser }}"
+    mode: '0600'
+## ============================================================================
