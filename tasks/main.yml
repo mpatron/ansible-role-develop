@@ -28,7 +28,7 @@
     line: PasswordAuthentication yes
     backup: true
   notify:
-    - "Reload sshd"
+    - "== Reload in redhat == Reload sshd"
 
 - name: "== Setup All == Déployer le fichier /etc/hosts"
   ansible.builtin.template:
@@ -49,7 +49,7 @@
     mode: '0644'
     state: present
     backup: true
-  notify: "Restart systemd-journald service"
+  notify: "== Reload in all == Restart systemd-journald service"
 - name: "== Setup All == Journald SystemMaxUse"
   community.general.ini_file:
     path: /etc/systemd/journald.conf
@@ -59,7 +59,7 @@
     mode: '0644'
     state: present
     backup: true
-  notify: "Restart systemd-journald service"
+  notify: "== Reload in all == Restart systemd-journald service"
 - name: "== Setup All == Journald SystemMaxFileSize"
   community.general.ini_file:
     path: /etc/systemd/journald.conf
@@ -69,7 +69,7 @@
     mode: '0644'
     state: present
     backup: true
-  notify: "Restart systemd-journald service"
+  notify: "== Reload in all == Restart systemd-journald service"
 
 
 ## ============================================================================
@@ -82,20 +82,20 @@
     mode: '0644'
   loop:
     - proxy-internet.sh
-- name: Copy ssh key configuration
-  ansible.builtin.copy:
-    src: "files/{{ item }}"
-    dest: "/home/{{ ansible_user }}/.ssh/{{ item }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0600'
-  loop:
-    - id_rsa
-- name: "== Setup user in RedHat == Copy id_rsa.pub"
-  ansible.builtin.template:
-    src: "id_rsa.pub.j2"
-    dest: "/home/{{ ansible_role_develop_conf_adminuser }}/.ssh/id_rsa.pub"
-    owner: "{{ ansible_role_develop_conf_adminuser }}"
-    group: "{{ ansible_role_develop_conf_adminuser }}"
-    mode: '0600'
+#- name: Copy ssh key configuration
+#  ansible.builtin.copy:
+#    src: "files/{{ item }}"
+#    dest: "/home/{{ ansible_role_develop_conf_adminuser }}/.ssh/{{ item }}"
+#    owner: "{{ ansible_role_develop_conf_adminuser }}"
+#    group: "{{ ansible_role_develop_conf_adminuser }}"
+#    mode: '0600'
+#  loop:
+#    - id_rsa
+#- name: "== Setup user in RedHat == Copy id_rsa.pub"
+#  ansible.builtin.template:
+#    src: "id_rsa.pub.j2"
+#    dest: "/home/{{ ansible_role_develop_conf_adminuser }}/.ssh/id_rsa.pub"
+#    owner: "{{ ansible_role_develop_conf_adminuser }}"
+#    group: "{{ ansible_role_develop_conf_adminuser }}"
+#    mode: '0600'
 ## ============================================================================

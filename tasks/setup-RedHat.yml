@@ -4,7 +4,6 @@
     name:
       - epel-release
       - git
-      - vim
       - bind-utils
       - nmap
       - tcpdump
@@ -24,6 +23,7 @@
   ansible.builtin.dnf:
     name:
       - curl
+      - vim
       - htop
     state: present
 
